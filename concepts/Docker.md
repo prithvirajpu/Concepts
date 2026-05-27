@@ -1,19 +1,8 @@
-# Docker Notes
+# 🐳 Docker Commands Reference
 
-> Docker is a platform for developing, shipping, and running applications inside lightweight, portable **containers**. It solves the "it works on my machine" problem by packaging applications with all their dependencies.
+A comprehensive guide to Docker CLI commands for developers.
 
-## Table of Contents
-- [Docker Notes](#docker-notes)
-  - [Table of Contents](#table-of-contents)
-  - [What is Docker?](#what-is-docker)
-  - [Why use Docker?](#why-use-docker)
-  - [Key Features](#key-features)
-  - [Core Concepts](#core-concepts)
-  - [Docker Architecture](#docker-architecture)
-  - [Where is Docker Used?](#where-is-docker-used)
-  - [Real-World Applications](#real-world-applications)
-  - [How Docker Works](#how-docker-works)
-  - [Common Docker Commands](#common-docker-commands)
+---
 
 ## What is Docker?
 
@@ -21,6 +10,8 @@
 
 - Containers are lightweight, portable, and run consistently across any environment.
 - Docker uses OS-level virtualization instead of full hardware virtualization.
+
+---
 
 ## Why use Docker?
 
@@ -32,6 +23,8 @@
 - Simplified dependency and environment management
 - Portability across cloud providers and servers
 
+---
+
 ## Key Features
 
 - Containerization of applications
@@ -42,14 +35,20 @@
 - Integration with orchestration tools (Kubernetes, Docker Swarm)
 - Security features like secrets management and user namespaces
 
+---
+
 ## Core Concepts
 
-- **Image**: Read-only template used to launch containers (e.g., `nginx:latest`, `python:3.11-slim`)
-- **Container**: A running instance of an image
-- **Dockerfile**: Text file with instructions to build a Docker image
-- **Registry**: Storage for Docker images (Docker Hub, GitHub Container Registry, etc.)
-- **Volume**: Persistent storage for data
-- **Network**: Allows containers to communicate with each other
+| Concept | Description |
+|---------|-------------|
+| **Image** | Read-only template used to launch containers (e.g., `nginx:latest`, `python:3.11-slim`) |
+| **Container** | A running instance of an image |
+| **Dockerfile** | Text file with instructions to build a Docker image |
+| **Registry** | Storage for Docker images (Docker Hub, GitHub Container Registry, etc.) |
+| **Volume** | Persistent storage for data |
+| **Network** | Allows containers to communicate with each other |
+
+---
 
 ## Docker Architecture
 
@@ -59,6 +58,8 @@
 4. **Docker Registry** — Stores and distributes images
 
 The client sends commands to the daemon, which then creates and manages containers.
+
+---
 
 ## Where is Docker Used?
 
@@ -70,6 +71,8 @@ The client sends commands to the daemon, which then creates and manages containe
 - Data science and machine learning projects
 - Internal tools and company infrastructure
 
+---
+
 ## Real-World Applications
 
 - Running web apps (Django + Gunicorn + Nginx)
@@ -79,23 +82,160 @@ The client sends commands to the daemon, which then creates and manages containe
 - Development environments with multiple services
 - SaaS product deployments
 
-## How Docker Works
+---
 
-1. You create a `Dockerfile`
-2. Build an image using `docker build`
-3. Run a container from that image using `docker run`
-4. Docker daemon manages the container lifecycle
-5. Containers share the host OS kernel but are isolated from each other
+## 📋 Docker Commands Reference
 
-## Common Docker Commands
+### 🔧 Basic Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker --help` | Get help with Docker |
+| `docker version` | Show Docker version |
+| `docker info` | Show system-wide information |
+
+---
+
+### 📦 Image Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker images` | List all local images |
+| `docker pull \<image_name\>` | Pull image from Docker Hub |
+| `docker build -t \<image_name\> .` | Build image from Dockerfile |
+| `docker build -t \<image_name\> . --no-cache` | Build without cache |
+| `docker rmi \<image_name\>` | Remove an image |
+| `docker image prune` | Remove all unused images |
+| `docker tag \<image_id\> \<repo\>:\<tag\>` | Tag an image |
+| `docker push \<repo\>:\<tag\>` | Push image to Docker Hub |
+| `docker search \<image_name\>` | Search Docker Hub |
+| `docker login -u \<username\>` | Login to Docker Hub |
+
+---
+
+### 🐳 Container Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker run \<image_name\>` | Create and run a container |
+| `docker run -d \<image_name\>` | Run container in background (detached) |
+| `docker run --name \<name\> \<image\>` | Run with custom name |
+| `docker run -p \<host_port\>:\<container_port\> \<image\>` | Map ports |
+| `docker ps` | List running containers |
+| `docker ps -a` | List all containers (including stopped) |
+| `docker start \<container_name\>` | Start a stopped container |
+| `docker stop \<container_name\>` | Stop a running container |
+| `docker restart \<container_name\>` | Restart a container |
+| `docker rm \<container_name\>` | Remove a stopped container |
+| `docker container prune` | Remove all stopped containers |
+| `docker pause \<container_name\>` | Pause a running container |
+| `docker unpause \<container_name\>` | Resume a paused container |
+
+---
+
+### 🔍 Inspect & Debug Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker exec -it \<container_name\> sh` | Open shell inside container |
+| `docker exec -it \<container_name\> bash` | Open bash inside container |
+| `docker logs \<container_name\>` | View container logs |
+| `docker logs -f \<container_name\>` | Follow logs in real-time |
+| `docker inspect \<container_name\>` | View detailed information |
+| `docker container stats` | View resource usage (CPU, memory) |
+
+---
+
+### 🌐 Network Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker network ls` | List all networks |
+| `docker network create \<network_name\>` | Create a network |
+| `docker network rm \<network_name\>` | Remove a network |
+| `docker network connect \<network\> \<container\>` | Connect container to network |
+| `docker network disconnect \<network\> \<container\>` | Disconnect container from network |
+
+---
+
+### 💾 Volume Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker volume ls` | List all volumes |
+| `docker volume create \<volume_name\>` | Create a volume |
+| `docker volume rm \<volume_name\>` | Remove a volume |
+| `docker run -v \<volume_name\>:\<container_path\> \<image\>` | Mount volume to container |
+| `docker volume prune` | Remove unused volumes |
+
+---
+
+### 🔄 Docker Compose Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker-compose up` | Start all services |
+| `docker-compose up -d` | Start all services in background |
+| `docker-compose down` | Stop all services |
+| `docker-compose ps` | List containers in compose |
+| `docker-compose logs -f` | Follow logs from all services |
+
+---
+
+### 🧹 Cleanup Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker system prune` | Remove unused containers, networks, images |
+| `docker system prune -a` | Remove all unused data (not just dangling) |
+
+---
+
+### ⚛️ React Portfolio Commands
+
+Common commands for your React portfolio project:
+
+| Command | Description |
+|---------|-------------|
+| `docker build -t my-react-portfolio .` | Build your portfolio image |
+| `docker run -p 5173:80 my-react-portfolio` | Run it on port 5173 |
+| `docker run -d -p 5173:80 my-react-portfolio --name portfolio` | Run in background with custom name |
+| `docker ps` | See running containers |
+| `docker stop portfolio` | Stop the container |
+| `docker logs -f portfolio` | See logs in real-time |
+| `docker exec -it portfolio sh` | Open shell inside container |
+| `docker rm portfolio` | Remove container (after stopping) |
+
+---
+
+## 🚀 Quick Start for React Portfolio
 
 ```bash
-docker build -t myapp .
-docker run -d -p 8000:8000 myapp
-docker ps
-docker logs container_name
-docker exec -it container_name bash
-docker stop container_name
-docker rm container_name
-docker images
-docker compose up -d
+# 1. Build the Docker image
+docker build -t my-react-portfolio .
+
+# 2. Run the container
+docker run -p 3000:80 my-react-portfolio
+
+# 3. Access at http://localhost:3000
+```
+
+---
+
+## 💡 Tips
+
+- Type `docker <command> --help` for detailed help on any command
+- Use `docker ps -a` to see stopped containers
+- Use `-d` flag to run containers in background
+- Always stop containers before removing them
+- Use `docker system prune` regularly to free up space
+
+---
+
+## 🔗 Resources
+
+- [Official Docker Documentation](https://docs.docker.com/)
+- [Docker CLI Cheat Sheet](https://www.docker.com/resources/cli-cheat-sheet/)
+- [Docker Hub](https://hub.docker.com/)
+
+---
